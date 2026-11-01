@@ -1,9 +1,14 @@
 package com.juniverse.datastructures.stack;
 
+
+import java.util.logging.Logger;
+import com.juniverse.datastructures.AppLogger;
 /**
  * Demostración de pilas con dos aplicaciones clásicas: balanceo de paréntesis y evaluación de expresiones en notación posfija.
  */
 public final class StackDemo {
+    private static final Logger LOGGER = AppLogger.get(StackDemo.class);
+
 
     private StackDemo() {
     }
@@ -15,15 +20,15 @@ public final class StackDemo {
      * @return {@code true} si cada símbolo abierto se cierra en el orden correcto
      */
     public static boolean balanced(String text) {
-        ArrayStack<Character> pila = new ArrayStack<>();
+        ArrayStack<Character> stack = new ArrayStack<>();
         for (char c : text.toCharArray()) {
             switch (c) {
-                case '(', '[', '{' -> pila.push(c);
+                case '(', '[', '{' -> stack.push(c);
                 case ')', ']', '}' -> {
-                    if (pila.isEmpty()) {
+                    if (stack.isEmpty()) {
                         return false;
                     }
-                    char open = pila.pop();
+                    char open = stack.pop();
                     if ((c == ')' && open != '(') || (c == ']' && open != '[') || (c == '}' && open != '{')) {
                         return false;
                     }
@@ -31,7 +36,7 @@ public final class StackDemo {
                 default -> { }
             }
         }
-        return pila.isEmpty();
+        return stack.isEmpty();
     }
 
     /**
@@ -41,35 +46,35 @@ public final class StackDemo {
      * @return resultado
      */
     public static int evalPostfix(String expression) {
-        LinkedStack<Integer> pila = new LinkedStack<>();
+        LinkedStack<Integer> stack = new LinkedStack<>();
         for (String token : expression.trim().split("\\s+")) {
             switch (token) {
-                case "+" -> pila.push(pila.pop() + pila.pop());
-                case "*" -> pila.push(pila.pop() * pila.pop());
+                case "+" -> stack.push(stack.pop() + stack.pop());
+                case "*" -> stack.push(stack.pop() * stack.pop());
                 case "-" -> {
-                    int b = pila.pop();
-                    pila.push(pila.pop() - b);
+                    int b = stack.pop();
+                    stack.push(stack.pop() - b);
                 }
                 case "/" -> {
-                    int b = pila.pop();
-                    pila.push(pila.pop() / b);
+                    int b = stack.pop();
+                    stack.push(stack.pop() / b);
                 }
-                default -> pila.push(Integer.parseInt(token));
+                default -> stack.push(Integer.parseInt(token));
             }
         }
-        return pila.pop();
+        return stack.pop();
     }
 
     /** Ejecuta la demostración. */
     public static void run() {
-        ArrayStack<String> pila = new ArrayStack<>();
-        pila.push("uno");
-        pila.push("dos");
-        pila.push("tres");
-        System.out.println("Pila (LIFO): peek = " + pila.peek() + ", pop = " + pila.pop() + ", pop = " + pila.pop() + ", tamaño = " + pila.size());
+        ArrayStack<String> stack = new ArrayStack<>();
+        stack.push("uno");
+        stack.push("dos");
+        stack.push("tres");
+        LOGGER.info("Pila (LIFO): peek = " + stack.peek() + ", pop = " + stack.pop() + ", pop = " + stack.pop() + ", tamaño = " + stack.size());
         for (String s : new String[]{"{[()]}", "([)]", "((", "f(x) = [a{b}c]"}) {
-            System.out.println("  ¿\"" + s + "\" está balanceado? " + balanced(s));
+            LOGGER.info("  ¿\"" + s + "\" está balanceado? " + balanced(s));
         }
-        System.out.println("Posfija \"3 4 + 2 *\" = " + evalPostfix("3 4 + 2 *") + ", \"10 2 8 * + 3 -\" = " + evalPostfix("10 2 8 * + 3 -"));
+        LOGGER.info("Posfija \"3 4 + 2 *\" = " + evalPostfix("3 4 + 2 *") + ", \"10 2 8 * + 3 -\" = " + evalPostfix("10 2 8 * + 3 -"));
     }
 }

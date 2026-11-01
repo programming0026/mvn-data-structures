@@ -221,16 +221,16 @@ public class BinarySearchTree<T extends Comparable<T>> {
         if (root == null) {
             return out;
         }
-        Queue<Node<T>> cola = new ArrayDeque<>();
-        cola.add(root);
-        while (!cola.isEmpty()) {
-            Node<T> n = cola.remove();
+        Queue<Node<T>> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node<T> n = queue.remove();
             out.add(n.value);
             if (n.left != null) {
-                cola.add(n.left);
+                queue.add(n.left);
             }
             if (n.right != null) {
-                cola.add(n.right);
+                queue.add(n.right);
             }
         }
         return out;

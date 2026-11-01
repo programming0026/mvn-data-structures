@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  *
  * @param <T> tipo de los elementos
  */
-public class LinkedQueue<T> {
+public class LinkedQueue<T> implements Queue<T> {
 
     private static final class Node<T> {
         private final T value;
@@ -27,7 +27,8 @@ public class LinkedQueue<T> {
      *
      * @param value elemento
      */
-    public void enqueue(T value) {
+    @Override
+    public boolean enqueue(T value) {
         Node<T> node = new Node<>(value);
         if (tail == null) {
             head = tail = node;
@@ -36,6 +37,7 @@ public class LinkedQueue<T> {
             tail = node;
         }
         size++;
+        return true;
     }
 
     /**
@@ -43,6 +45,7 @@ public class LinkedQueue<T> {
      *
      * @return primer elemento
      */
+    @Override
     public T dequeue() {
         if (head == null) {
             throw new NoSuchElementException("Cola vacía");
@@ -56,11 +59,7 @@ public class LinkedQueue<T> {
         return value;
     }
 
-    /**
-     * Indica si está vacía.
-     *
-     * @return {@code true} si no tiene elementos
-     */
+    @Override
     public boolean isEmpty() {
         return head == null;
     }
@@ -70,6 +69,7 @@ public class LinkedQueue<T> {
      *
      * @return tamaño
      */
+    @Override
     public int size() {
         return size;
     }

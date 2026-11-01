@@ -8,7 +8,7 @@ import java.util.EmptyStackException;
  *
  * @param <T> tipo de los elementos
  */
-public class ArrayStack<T> {
+public class ArrayStack<T> implements Stack<T> {
 
     private Object[] data = new Object[4];
     private int size;
@@ -18,6 +18,7 @@ public class ArrayStack<T> {
      *
      * @param value elemento
      */
+    @Override
     public void push(T value) {
         if (size == data.length) {
             data = Arrays.copyOf(data, size * 2);
@@ -31,6 +32,7 @@ public class ArrayStack<T> {
      * @return elemento de la cima
      */
     @SuppressWarnings("unchecked")
+    @Override
     public T pop() {
         if (size == 0) {
             throw new EmptyStackException();
@@ -46,6 +48,7 @@ public class ArrayStack<T> {
      * @return elemento de la cima
      */
     @SuppressWarnings("unchecked")
+    @Override
     public T peek() {
         if (size == 0) {
             throw new EmptyStackException();
@@ -53,11 +56,7 @@ public class ArrayStack<T> {
         return (T) data[size - 1];
     }
 
-    /**
-     * Indica si está vacía.
-     *
-     * @return {@code true} si no tiene elementos
-     */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -67,6 +66,7 @@ public class ArrayStack<T> {
      *
      * @return tamaño
      */
+    @Override
     public int size() {
         return size;
     }

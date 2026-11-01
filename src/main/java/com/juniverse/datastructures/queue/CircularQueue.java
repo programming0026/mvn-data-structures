@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  *
  * @param <T> tipo de los elementos
  */
-public class CircularQueue<T> {
+public class CircularQueue<T> implements Queue<T> {
 
     private final Object[] data;
     private int head;
@@ -29,6 +29,7 @@ public class CircularQueue<T> {
      * @param value elemento
      * @return {@code false} si la cola está llena
      */
+    @Override
     public boolean enqueue(T value) {
         if (size == data.length) {
             return false;
@@ -44,6 +45,7 @@ public class CircularQueue<T> {
      * @return primer elemento
      */
     @SuppressWarnings("unchecked")
+    @Override
     public T dequeue() {
         if (size == 0) {
             throw new NoSuchElementException("Cola vacía");
@@ -60,15 +62,17 @@ public class CircularQueue<T> {
      *
      * @return tamaño
      */
+    @Override
     public int size() {
         return size;
     }
 
-    /**
-     * Indica si está llena.
-     *
-     * @return {@code true} si no cabe otro elemento
-     */
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /** Indica si la cola alcanzó su capacidad. */
     public boolean isFull() {
         return size == data.length;
     }

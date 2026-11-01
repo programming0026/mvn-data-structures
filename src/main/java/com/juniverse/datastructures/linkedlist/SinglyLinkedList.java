@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  *
  * @param <T> tipo de los elementos
  */
-public class SinglyLinkedList<T> implements Iterable<T> {
+public class SinglyLinkedList<T> implements LinkedSequence<T> {
 
     private static final class Node<T> {
         private final T value;
@@ -29,6 +29,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
      *
      * @param value elemento
      */
+    @Override
     public void addFirst(T value) {
         Node<T> node = new Node<>(value);
         node.next = head;
@@ -41,6 +42,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
      *
      * @param value elemento
      */
+    @Override
     public void addLast(T value) {
         Node<T> node = new Node<>(value);
         if (head == null) {
@@ -60,6 +62,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
      *
      * @return primer elemento
      */
+    @Override
     public T removeFirst() {
         if (head == null) {
             throw new NoSuchElementException("Lista vacía");
@@ -92,12 +95,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         return false;
     }
 
-    /**
-     * Indica si contiene el valor. O(n).
-     *
-     * @param value elemento
-     * @return {@code true} si existe
-     */
     public boolean contains(T value) {
         for (T item : this) {
             if (java.util.Objects.equals(item, value)) {
@@ -125,6 +122,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
      *
      * @return tamaño
      */
+    @Override
     public int size() {
         return size;
     }

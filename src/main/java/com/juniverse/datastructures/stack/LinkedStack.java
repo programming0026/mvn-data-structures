@@ -7,7 +7,7 @@ import java.util.EmptyStackException;
  *
  * @param <T> tipo de los elementos
  */
-public class LinkedStack<T> {
+public class LinkedStack<T> implements Stack<T> {
 
     private static final class Node<T> {
         private final T value;
@@ -27,6 +27,7 @@ public class LinkedStack<T> {
      *
      * @param value elemento
      */
+    @Override
     public void push(T value) {
         top = new Node<>(value, top);
         size++;
@@ -37,6 +38,7 @@ public class LinkedStack<T> {
      *
      * @return elemento de la cima
      */
+    @Override
     public T pop() {
         if (top == null) {
             throw new EmptyStackException();
@@ -47,11 +49,15 @@ public class LinkedStack<T> {
         return value;
     }
 
-    /**
-     * Indica si está vacía.
-     *
-     * @return {@code true} si no tiene elementos
-     */
+    @Override
+    public T peek() {
+        if (top == null) {
+            throw new EmptyStackException();
+        }
+        return top.value;
+    }
+
+    @Override
     public boolean isEmpty() {
         return top == null;
     }
@@ -61,6 +67,7 @@ public class LinkedStack<T> {
      *
      * @return tamaño
      */
+    @Override
     public int size() {
         return size;
     }

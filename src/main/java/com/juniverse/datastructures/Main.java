@@ -6,16 +6,19 @@ import com.juniverse.datastructures.queue.QueueDemo;
 import com.juniverse.datastructures.stack.StackDemo;
 import com.juniverse.datastructures.tree.TreeDemo;
 
+import java.util.logging.Logger;
 /**
  * Estructuras de datos implementadas desde cero: listas, listas enlazadas, pilas, colas y árboles.
  */
 public final class Main {
+    private static final Logger LOGGER = AppLogger.get(Main.class);
+
 
     private Main() {
     }
 
     private static void title(String text) {
-        System.out.println("\n=========== " + text + " ===========");
+        LOGGER.info("\n=========== " + text + " ===========");
     }
 
     /**

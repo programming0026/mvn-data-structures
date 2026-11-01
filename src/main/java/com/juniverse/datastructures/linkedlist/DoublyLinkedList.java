@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  *
  * @param <T> tipo de los elementos
  */
-public class DoublyLinkedList<T> implements Iterable<T> {
+public class DoublyLinkedList<T> implements LinkedSequence<T> {
 
     private static final class Node<T> {
         private final T value;
@@ -31,6 +31,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      *
      * @param value elemento
      */
+    @Override
     public void addFirst(T value) {
         Node<T> node = new Node<>(value);
         if (head == null) {
@@ -48,6 +49,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      *
      * @param value elemento
      */
+    @Override
     public void addLast(T value) {
         Node<T> node = new Node<>(value);
         if (tail == null) {
@@ -65,6 +67,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      *
      * @return primer elemento
      */
+    @Override
     public T removeFirst() {
         if (head == null) {
             throw new NoSuchElementException("Lista vacía");
@@ -105,6 +108,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      *
      * @return tamaño
      */
+    @Override
     public int size() {
         return size;
     }

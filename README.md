@@ -12,6 +12,16 @@ Implementación **desde cero** (sin usar `java.util`) de las estructuras de dato
 | `queue` | `CircularQueue<T>`, `LinkedQueue<T>` | Cola FIFO con arreglo circular de capacidad fija y con nodos |
 | `tree` | `BinarySearchTree<T>`, `GeneralTree<T>` | Árbol binario de búsqueda (insertar, buscar, borrar, altura, recorridos en orden, preorden, postorden y por niveles) y árbol general (carpetas) |
 
+## Interfaces
+
+Cada familia tiene una interfaz y varias implementaciones, y todas se prueban con el mismo conjunto de pruebas (principio de sustitución de Liskov):
+
+| Interfaz | Implementaciones |
+|----------|------------------|
+| `Stack<T>` | `ArrayStack`, `LinkedStack` |
+| `Queue<T>` | `LinkedQueue`, `CircularQueue` |
+| `LinkedSequence<T>` | `SinglyLinkedList`, `DoublyLinkedList` |
+
 ## Complejidad
 
 | Estructura | Acceso por índice | Buscar | Insertar/borrar al inicio | Insertar/borrar al final |
@@ -47,6 +57,12 @@ mvn compile exec:java
 # o como JAR ejecutable (fat jar)
 mvn clean package
 java -jar target/mvn-data-structures-1.0.0-SNAPSHOT-launcher.jar
+```
+
+## Pruebas
+
+```bash
+mvn test
 ```
 
 ## Licencia

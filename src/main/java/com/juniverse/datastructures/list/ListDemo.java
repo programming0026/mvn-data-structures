@@ -1,31 +1,36 @@
 package com.juniverse.datastructures.list;
 
+
+import java.util.logging.Logger;
+import com.juniverse.datastructures.AppLogger;
 /** Demostración de la lista con arreglo dinámico. */
 public final class ListDemo {
+    private static final Logger LOGGER = AppLogger.get(ListDemo.class);
+
 
     private ListDemo() {
     }
 
     /** Ejecuta la demostración. */
     public static void run() {
-        DynamicArray<String> lista = new DynamicArray<>();
+        DynamicArray<String> list = new DynamicArray<>();
         for (String s : new String[]{"a", "b", "c", "d", "e"}) {
-            lista.add(s);
+            list.add(s);
         }
-        System.out.println("Lista: " + lista + " (tamaño " + lista.size() + ", capacidad " + lista.capacity() + " -> creció al llenarse)");
-        lista.add(2, "X");
-        System.out.println("add(2, \"X\"): " + lista + "  (se desplazaron los elementos a la derecha)");
-        System.out.println("get(3) = " + lista.get(3) + ", indexOf(\"d\") = " + lista.indexOf("d"));
-        System.out.println("remove(0) = " + lista.remove(0) + " -> " + lista);
+        LOGGER.info("Lista: " + list + " (tamaño " + list.size() + ", capacidad " + list.capacity() + " -> creció al llenarse)");
+        list.add(2, "X");
+        LOGGER.info("add(2, \"X\"): " + list + "  (se desplazaron los elementos a la derecha)");
+        LOGGER.info("get(3) = " + list.get(3) + ", indexOf(\"d\") = " + list.indexOf("d"));
+        LOGGER.info("remove(0) = " + list.remove(0) + " -> " + list);
         StringBuilder sb = new StringBuilder();
-        for (String s : lista) {
+        for (String s : list) {
             sb.append(s.toUpperCase());
         }
-        System.out.println("Recorrido con for-each (Iterable): " + sb);
+        LOGGER.info("Recorrido con for-each (Iterable): " + sb);
         try {
-            lista.get(99);
+            list.get(99);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Fuera de rango: " + e.getMessage());
+            LOGGER.info("Fuera de rango: " + e.getMessage());
         }
     }
 }
